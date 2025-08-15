@@ -3,12 +3,20 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getCardById } from '../../services/tarotService';
 import './CardDetail.css';
 
+// Utility function to format JSON with proper indentation
+const formatJSON = (obj) => {
+  return JSON.stringify(obj, null, 2);
+};
+
 const CardDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showDebug, setShowDebug] = useState(false);
+
+  const toggleDebug = () => setShowDebug(!showDebug);
 
   useEffect(() => {
     const fetchCard = async () => {
@@ -98,6 +106,21 @@ const CardDetail = () => {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="debug-section">
+          <button 
+            onClick={toggleDebug} 
+            className="debug-toggle"
+          >
+            {showDebug ? 'Hide' : 'Show'} Debug Info
+          </button>
+          
+          {showDebug && (
+            <pre className="debug-info">
+              {formatJSON(card)}
+            </pre>
+          )}
         </div>
       </div>
     </div>

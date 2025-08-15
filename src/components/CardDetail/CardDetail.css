@@ -128,3 +128,49 @@
     font-size: 12px;
   }
 }
+
+.debug-section {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.debug-toggle {
+  padding: 0.5rem 1rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.debug-toggle:hover {
+  background-color: #34495e;
+}
+
+.debug-info {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .debug-info {
+    background-color: #1a1a1a;
+    border-color: #333;
+    color: #e0e0e0;
+  }
+}
