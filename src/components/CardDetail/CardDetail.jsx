@@ -70,6 +70,21 @@ const CardDetail = () => {
       </button>
       
       <div className="card-content">
+        <div className="debug-controls">
+          <button onClick={toggleDebug} className="debug-toggle">
+            {showDebug ? 'Hide Raw Data' : 'Show Raw Data'}
+          </button>
+        </div>
+
+        {showDebug && (
+          <div className="debug-view">
+            <h3>Raw Card Data</h3>
+            <pre className="debug-json">
+              {formatJSON(card)}
+            </pre>
+          </div>
+        )}
+
         <h2 className="card-title">{card.name}</h2>
         
         <div className="card-main">
