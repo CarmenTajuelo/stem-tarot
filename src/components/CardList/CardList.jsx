@@ -4,19 +4,23 @@ import { getAllCards } from '../../services/tarotService';
 import './CardList.css';
 
 const CardList = () => {
+  // State for cards and loading status
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch cards when component mounts
   useEffect(() => {
     const fetchCards = async () => {
       try {
         setLoading(true);
         const data = await getAllCards();
         setCards(data);
-      } catch (err) {
-        setError(err.message);
+        setError(null);
+      } catch (error) {
+        setError('Failed to load tarot cards');
+        console.error('Error loading cards:', error);
       } finally {
         setLoading(false);
       }
@@ -25,41 +29,33 @@ const CardList = () => {
     fetchCards();
   }, []);
 
+  // Handle card click navigation
   const handleCardClick = (cardId) => {
     navigate(`/card/${cardId}`);
   };
 
+  // Show loading state
   if (loading) {
-    return <div className="loading-container">Loading cards...</div>;
+    return <div className="loading">Loading cards...</div>;
   }
 
+  // Show error state
   if (error) {
-    return <div className="error-container">Error: {error}</div>;
+    return <div className="error">{error}</div>;
   }
 
   return (
     <div className="card-grid">
       {cards.map((card) => (
-        <div 
+        <div
           key={card.id}
-          className="card-item"
+          className="card-back"
           onClick={() => handleCardClick(card.id)}
-          aria-label={`Tarot card ${card.name}`}
-          role="button"
-          tabIndex={0}
+          aria-label={`Tarot card ${card.name || 'Unknown'}`}
         >
-          {card.image ? (
-            <img 
-              src={card.image} 
-              alt={card.name} 
-              className="card-image"
-            />
-          ) : (
-            <div className="card-back">
-              <div className="card-back-design"></div>
-            </div>
-          )}
-          <div className="card-name">{card.name}</div>
+          <div className="card-back-design">
+            <div className="card-back-pattern"></div>
+          </div>
         </div>
       ))}
     </div>

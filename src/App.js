@@ -1,12 +1,16 @@
 import React from 'react';
-import { RouterProvider } from 'react-router-dom';
-import { router } from './router/router';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <header className="App-header">
+        <h1>Tarot Reading</h1>
+      </header>
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

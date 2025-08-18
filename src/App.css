@@ -3,3 +3,20 @@
   min-height: 100vh;
   background-color: #f5f5f5;
 }
+
+.App-header {
+  background-color: #2c3e50;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.App-header h1 {
+  color: white;
+  margin: 0;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

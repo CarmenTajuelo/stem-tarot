@@ -3,29 +3,27 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getCardById } from '../../services/tarotService';
 import './CardDetail.css';
 
-// Utility function to format JSON with proper indentation
-const formatJSON = (obj) => {
-  return JSON.stringify(obj, null, 2);
-};
-
 const CardDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  // States for card data, loading and error
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDebug, setShowDebug] = useState(false);
+  
+  // Get card ID from URL parameters
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  const toggleDebug = () => setShowDebug(!showDebug);
-
+  // Fetch card data when component mounts or ID changes
   useEffect(() => {
     const fetchCard = async () => {
       try {
         setLoading(true);
         const data = await getCardById(id);
         setCard(data);
-      } catch (err) {
-        setError(err.message);
+        setError(null);
+      } catch (error) {
+        setError('Failed to load card details');
+        console.error('Error loading card:', error);
       } finally {
         setLoading(false);
       }
@@ -34,31 +32,36 @@ const CardDetail = () => {
     fetchCard();
   }, [id]);
 
+  // Handle back navigation
   const handleBack = () => {
     navigate('/');
   };
 
+  // Show loading state
   if (loading) {
+    return <div className="loading">Loading card details...</div>;
+  }
+
+  // Show error state
+  if (error) {
     return (
-      <div className="card-detail">
+      <div className="error-container">
+        <div className="error">{error}</div>
         <button onClick={handleBack} className="back-button">
-          ← Back to Cards
+          Back to Cards
         </button>
-        <div className="loading">Loading card details...</div>
       </div>
     );
   }
 
-  if (error) {
+  // Show card not found state
+  if (!card) {
     return (
-      <div className="card-detail">
+      <div className="error-container">
+        <div className="error">Card not found</div>
         <button onClick={handleBack} className="back-button">
-          ← Back to Cards
+          Back to Cards
         </button>
-        <div className="error-container">
-          <div className="error">Error loading card details: {error}</div>
-          <div className="debug-info">Card ID: {id}</div>
-        </div>
       </div>
     );
   }
@@ -70,72 +73,13 @@ const CardDetail = () => {
       </button>
       
       <div className="card-content">
-        <div className="debug-controls">
-          <button onClick={toggleDebug} className="debug-toggle">
-            {showDebug ? 'Hide Raw Data' : 'Show Raw Data'}
-          </button>
-        </div>
-
-        {showDebug && (
-          <div className="debug-view">
-            <h3>Raw Card Data</h3>
-            <pre className="debug-json">
-              {formatJSON(card)}
-            </pre>
-          </div>
-        )}
-
-        <h2 className="card-title">{card.name}</h2>
+        <h2 className="card-title">{card.name || 'Card Details'}</h2>
         
-        <div className="card-main">
-          <div className="card-image-container">
-            {card.image ? (
-              <img src={card.image} alt={card.name} className="card-image" />
-            ) : (
-              <div className="card-placeholder">No image available</div>
-            )}
-          </div>
-          
-          <div className="card-info">
-            <div className="info-section">
-              <h3>Type</h3>
-              <p>{card.type || 'Unknown'}</p>
-            </div>
-            
-            <div className="info-section">
-              <h3>Description</h3>
-              <p>{card.description || 'No description available'}</p>
-            </div>
-
-            {card.meaning_up && (
-              <div className="info-section">
-                <h3>Upright Meaning</h3>
-                <p>{card.meaning_up}</p>
-              </div>
-            )}
-
-            {card.meaning_rev && (
-              <div className="info-section">
-                <h3>Reversed Meaning</h3>
-                <p>{card.meaning_rev}</p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="debug-section">
-          <button 
-            onClick={toggleDebug} 
-            className="debug-toggle"
-          >
-            {showDebug ? 'Hide' : 'Show'} Debug Info
-          </button>
-          
-          {showDebug && (
-            <pre className="debug-info">
-              {formatJSON(card)}
-            </pre>
-          )}
+        <div className="card-info">
+          {/* Display all available data from the card object */}
+          <pre className="debug-info">
+            {JSON.stringify(card, null, 2)}
+          </pre>
         </div>
       </div>
     </div>
