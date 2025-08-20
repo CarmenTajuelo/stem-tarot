@@ -1,5 +1,5 @@
 .card-detail {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -24,9 +24,8 @@
 }
 
 .card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
   background-color: white;
   padding: 2rem;
@@ -34,52 +33,89 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.card-title {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin: 0;
+.arcane-section,
+.goddess-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.arcane-image-container,
+.goddess-image-container {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.arcane-image,
+.goddess-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.arcane-image:hover,
+.goddess-image:hover {
+  transform: scale(1.02);
+}
+
+.image-attribution {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.8rem;
   text-align: center;
 }
 
-.card-image-container {
-  width: 100%;
-  max-width: 300px;
-  margin: 1rem 0;
+.image-attribution a {
+  color: white;
+  text-decoration: underline;
+  margin-left: 0.5rem;
 }
 
-.card-image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.card-info {
-  width: 100%;
+.arcane-header {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.info-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.label {
+.arcane-number {
+  font-size: 2.5rem;
   font-weight: bold;
   color: #2c3e50;
-  font-size: 1.1rem;
+  opacity: 0.8;
 }
 
-.value {
-  color: #34495e;
-  line-height: 1.6;
+.arcane-name {
+  font-size: 2rem;
+  color: #2c3e50;
   margin: 0;
 }
 
-.loading, .error {
+.goddess-name {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+}
+
+.arcane-description,
+.goddess-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #34495e;
+  text-align: justify;
+}
+
+.loading,
+.error {
   text-align: center;
   padding: 2rem;
   font-size: 1.2rem;
@@ -97,34 +133,28 @@
   padding: 2rem;
 }
 
-.debug-info {
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-family: monospace;
-  font-size: 14px;
-  width: 100%;
-  max-width: 100%;
-  overflow: auto;
-}
-
-@media (max-width: 600px) {
+/* Media Queries */
+@media (max-width: 768px) {
+  .card-content {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  
   .card-detail {
     padding: 1rem;
   }
-  
-  .card-content {
-    padding: 1rem;
-  }
-  
-  .card-title {
+
+  .arcane-name,
+  .goddess-name {
     font-size: 1.5rem;
   }
 
-  .debug-info {
-    font-size: 12px;
+  .arcane-number {
+    font-size: 2rem;
+  }
+
+  .arcane-description,
+  .goddess-description {
+    font-size: 1rem;
   }
 }

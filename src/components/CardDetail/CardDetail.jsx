@@ -73,13 +73,53 @@ const CardDetail = () => {
       </button>
       
       <div className="card-content">
-        <h2 className="card-title">{card.name || 'Card Details'}</h2>
-        
-        <div className="card-info">
-          {/* Display all available data from the card object */}
-          <pre className="debug-info">
-            {JSON.stringify(card, null, 2)}
-          </pre>
+        <div className="arcane-section">
+          <div className="arcane-image-container">
+            <img 
+              src={card.arcaneImage.imageSrc} 
+              alt={card.arcaneName}
+              className="arcane-image"
+            />
+            <div className="image-attribution">
+              Image by {card.arcaneImage.author}
+              {card.arcaneImage.license && ` - ${card.arcaneImage.license}`}
+            </div>
+          </div>
+          
+          <div className="arcane-info">
+            <div className="arcane-header">
+              <span className="arcane-number">{card.arcaneNumber}</span>
+              <h2 className="arcane-name">{card.arcaneName}</h2>
+            </div>
+            <p className="arcane-description">{card.arcaneDescription}</p>
+          </div>
+        </div>
+
+        <div className="goddess-section">
+          <div className="goddess-image-container">
+            <img 
+              src={card.goddessImage.imageSrc} 
+              alt={card.goddessName}
+              className="goddess-image"
+            />
+            <div className="image-attribution">
+              {card.goddessImage.author}
+              {card.goddessImage.licenseUrl && (
+                <a 
+                  href={card.goddessImage.licenseUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  - License
+                </a>
+              )}
+            </div>
+          </div>
+          
+          <div className="goddess-info">
+            <h3 className="goddess-name">{card.goddessName}</h3>
+            <p className="goddess-description">{card.goddessDescription}</p>
+          </div>
         </div>
       </div>
     </div>
