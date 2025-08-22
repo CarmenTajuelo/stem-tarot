@@ -39,7 +39,7 @@ const CardDetail = () => {
 
   // Show loading state
   if (loading) {
-    return <div className="loading">Loading card details...</div>;
+    return <div className="loading">Cargando los detalles de las cartas...</div>;
   }
 
   // Show error state
@@ -48,7 +48,7 @@ const CardDetail = () => {
       <div className="error-container">
         <div className="error">{error}</div>
         <button onClick={handleBack} className="back-button">
-          Back to Cards
+          Volver a las cartas
         </button>
       </div>
     );
@@ -58,9 +58,9 @@ const CardDetail = () => {
   if (!card) {
     return (
       <div className="error-container">
-        <div className="error">Card not found</div>
+        <div className="error">Carta no encontrada</div>
         <button onClick={handleBack} className="back-button">
-          Back to Cards
+          Volver a las cartas
         </button>
       </div>
     );
@@ -69,7 +69,7 @@ const CardDetail = () => {
   return (
     <div className="card-detail">
       <button onClick={handleBack} className="back-button">
-        ← Back to Cards
+        ← Volver a las cartas
       </button>
       
       <div className="card-content">
@@ -81,7 +81,7 @@ const CardDetail = () => {
               className="arcane-image"
             />
             <div className="image-attribution">
-              Image by {card.arcaneImage.author}
+              Imagen de {card.arcaneImage.author}
               {card.arcaneImage.license && ` - ${card.arcaneImage.license}`}
             </div>
           </div>
