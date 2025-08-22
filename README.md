@@ -37,7 +37,7 @@ Follow these steps to run the project locally:
 
 1. **Clone the repository**
    ```
-   git clone https://github.com/your-username/tarot-stem.git
+   git clone https://github.com/CarmenTajuelo/stem-tarot.git
    cd tarot-stem
 
 2. **Install dependencies**
