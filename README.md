@@ -49,7 +49,7 @@ Follow these steps to run the project locally:
    npm run dev
    
 4. **Open in your browser**
-   Go to 👉 http://localhost:5173
+   - Go to 👉 http://localhost:5173
 
 # 📡 API Reference
 
