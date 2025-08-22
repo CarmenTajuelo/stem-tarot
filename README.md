@@ -56,6 +56,7 @@ Follow these steps to run the project locally:
 All tarot data comes from this public API:  
 👉 [https://6872278c76a5723aacd3cbb3.mockapi.io/api/v1/tarot](https://6872278c76a5723aacd3cbb3.mockapi.io/api/v1/tarot)  
 The API is public and does not require authentication.
+All images include attribution data (author, license, licenseUrl) and should be credited properly.
 
 ---
 
