@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Tarot Reading</h1>
+        <h1>STEM TAROT</h1>
       </header>
       <main>
         <Outlet />

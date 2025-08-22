@@ -5,7 +5,7 @@ import './Home.css';
 const Home = () => {
   return (
     <div className="home">
-      <h1>Tarot Cards</h1>
+      <h1>Tarot de Mujeres STEM</h1>
       <CardList />
     </div>
   );
